@@ -1,49 +1,79 @@
 #include "game.h"
 
-#include <iostream>
-#include <SFML/Graphics/RenderWindow.hpp>
+
 #include <SFML/Window/Event.hpp>
+
+
+constexpr float kCooldown_limit_ = 0.15f;
 
 Game::Game()
 {
-	window_.create(sf::VideoMode(1200, 720), "Space Shooter");
-	std::cout << "hello world" << '\n';
+	window_.create(sf::VideoMode::getDesktopMode(), "Space Shooter", sf::Style::Fullscreen);
 }
+
 
 void Game::Loop()
 {
-	PlayerShip player;
+
+	window_.setMouseCursorVisible(false);
+
+	double dt = 0.016f;
 
 	while (window_.isOpen())
 	{
 
-		
-		sf::Vector2i mousePosition = sf::Mouse::getPosition(window_);
-		player.setPosition({ static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y) });
-
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			if (player_ship_.IsShootReady())
+			{
+				player_projectiles_.Spawn(player_ship_.GetPosition(), { 0, -1500 });
+				player_ship_.ShootConfirm();
+			}
+		}
 
 		sf::Event event;
 		while (window_.pollEvent(event))
 		{
 
-			if (event.type == sf::Event::MouseButtonPressed)
-			{
-				projectiles_.Spawn(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
-			}
+			if (event.type == sf::Event::MouseMoved)
+				player_ship_.SetPosition(sf::Vector2u(event.mouseMove.x, event.mouseMove.y));
 
-			if (event.type == sf::Event::Closed)
+			if (event.type == sf::Event::KeyPressed)
 			{
-				window_.close();
+				if (event.key.code == sf::Keyboard::Escape)
+				{
+					window_.close();
+				}
 			}
 		}
 
-		projectiles_.Refresh(dt_, window_.getSize());
+		projectiles_.Refresh(dt, window_.getSize());
+		asteroids_.Refresh(dt, window_.getSize());
+		enemy_projectiles_.Refresh(dt, window_.getSize());
+		enemy_ship_.Refresh(dt, window_.getSize(), enemy_projectiles_);
+
+		enemy_projectiles_.Refresh(dt, window_.getSize());
+		enemy_ship_.Refresh(dt, window_.getSize(), enemy_projectiles_);
+
+		player_ship_.CheckCollisions(asteroids_.GetEntities());
+		player_ship_.CheckCollisions(enemy_ship_.GetEntities());
+		player_ship_.CheckCollisions(enemy_projectiles_.GetEntities());
+
+		player_projectiles_.Refresh(dt, window_.getSize());
+		player_projectiles_.CheckCollisions(asteroids_.GetEntities());
+		player_projectiles_.CheckCollisions(enemy_ship_.GetEntities());
+
 
 		window_.clear();
-		window_.draw(projectiles_);
-		window_.draw(player);
+
+		window_.draw(player_projectiles_);
+		window_.draw(enemy_projectiles_);
+		window_.draw(asteroids_);
+		window_.draw(enemy_ship_);
+		window_.draw(player_ship_);
 		window_.display();
 
-		dt_ = clock_.restart().asSeconds();
+		dt = clock_.restart().asSeconds();
 	}
+	window_.setMouseCursorVisible(true);
 }

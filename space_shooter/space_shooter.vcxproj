@@ -130,24 +130,26 @@
     <ClCompile Include="asteroid.cc" />
     <ClCompile Include="asteroid_manager.cc" />
     <ClCompile Include="enemy.cc" />
+    <ClCompile Include="enemy_manager.cc" />
     <ClCompile Include="entity.cc" />
-    <ClCompile Include="entity_manager.cc" />
     <ClCompile Include="game.cc" />
+    <ClCompile Include="player_ship_manager.cc" />
     <ClCompile Include="projectiles.cc" />
     <ClCompile Include="projectiles_manager.cc" />
-    <ClCompile Include="spaceship.cc" />
-    <ClCompile Include="space_shooter.cpp" />
+    <ClCompile Include="player_ship.cc" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="asteroid.h" />
     <ClInclude Include="asteroid_manager.h" />
     <ClInclude Include="enemy.h" />
+    <ClInclude Include="enemy_manager.h" />
     <ClInclude Include="entity.h" />
-    <ClInclude Include="entity_manager.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="player_ship_manager.h" />
     <ClInclude Include="projectiles.h" />
     <ClInclude Include="projectiles_manager.h" />
-    <ClInclude Include="spaceship.h" />
+    <ClInclude Include="player_ship.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

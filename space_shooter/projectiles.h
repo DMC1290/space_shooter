@@ -1,26 +1,22 @@
 #ifndef PROJECTILES_H
 #define PROJECTILES_H
-#include <SFML/Graphics.hpp>
 
+#include "entity.h"
 
-class Projectiles : public sf::Drawable, public sf::Transformable
+class Projectiles : public Entity
 {
 
 public:
-
-	Projectiles();
-	void PlayerProjectilesMove(float dt, const sf::Vector2u& window_size);
-	bool IsDead() const { return is_dead_; }
-
-protected:
-
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+	Projectiles(sf::Vector2f direction);
+	//void UpdateAnimation(const double dt);
 
 private:
-
 	static sf::Texture texture_;
-	sf::Vector2f direction_;
-	sf::Sprite sprite_;
-	bool is_dead_ = false;
+
+	// animation projectile
+
+	//static std::array<sf::Texture, 4> animation_;
+	//float time_elapsed_ = 0.f;
+	//int idx_texture_ = 0;
 };
 #endif

@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="space_shooter.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="projectiles.cc">
@@ -27,10 +27,7 @@
     <ClCompile Include="projectiles_manager.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="spaceship.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="enemy.cc">
+    <ClCompile Include="player_ship.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="asteroid_manager.cc">
@@ -42,7 +39,13 @@
     <ClCompile Include="entity.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="entity_manager.cc">
+    <ClCompile Include="enemy.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy_manager.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="player_ship_manager.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,10 +59,7 @@
     <ClInclude Include="projectiles_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="spaceship.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="enemy.h">
+    <ClInclude Include="player_ship.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="asteroid_manager.h">
@@ -71,7 +71,13 @@
     <ClInclude Include="entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="entity_manager.h">
+    <ClInclude Include="enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_ship_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,16 +1,20 @@
 #include "projectiles_manager.h"
 
+#include <iostream>
+
 #include "asteroid.h"
 
 
-void ProjectilesManager::Spawn(sf::Vector2f spawn_position)
+void ProjectilesManager::Spawn(sf::Vector2f spawn_position, sf::Vector2f direction)
 {
-	projectiles_.emplace_back();
+	projectiles_.emplace_back(direction);
 	projectiles_.back().setPosition(spawn_position);
 }
 
-void ProjectilesManager::Refresh(float dt, const sf::Vector2u& window_size)
+void ProjectilesManager::Refresh(const double dt, const sf::Vector2u& window_size)
 {
+
+	// Cleaning unused projectiles
 	auto removed_elt = std::remove_if
 	(
 		projectiles_.begin(),
@@ -21,26 +25,43 @@ void ProjectilesManager::Refresh(float dt, const sf::Vector2u& window_size)
 
 	if (removed_elt != projectiles_.end())
 	{
-		projectiles_.erase(removed_elt);
+		projectiles_.erase(removed_elt, projectiles_.end());
 	}
 
 	for (Projectiles& p : projectiles_)
 	{
-		p.PlayerProjectilesMove(dt, window_size);
+		p.Move(dt, window_size);
+		//p.UpdateAnimation(dt);
 	}
+
+	std::cout << "nb projectiles ? " << projectiles_.size() << '\n';
 }
 
-
-void ProjectilesManager::CheckAsteroidsCollisions(std::vector<Asteroid>& asteroids)
+void ProjectilesManager::CheckCollisions(std::vector<Asteroid>& asteroids)
 {
 	for(auto& p : projectiles_)
 	{
 		for(auto& a : asteroids)
 		{
-			if (p.isDead()==false && a.IsDead()==false && p.Intersects(a.HitBox))
+			if (p.IsDead() == false && a.IsDead() == false && p.Intersects(a.HitBox()))
 			{
 				p.SetDeath();
 				a.SetDeath();
+			}
+		}
+	}
+}
+
+void ProjectilesManager::CheckCollisions(std::vector<Enemy>& enemies)
+{
+	for (auto& p : projectiles_)
+	{
+		for(auto& e : enemies)
+		{
+			if (p.IsDead() == false && e.IsDead() == false && p.Intersects(e.HitBox()))
+			{
+				p.SetDeath();
+				e.Damage(1);
 			}
 		}
 	}

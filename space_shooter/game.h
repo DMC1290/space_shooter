@@ -1,8 +1,11 @@
 #ifndef GAME_H
 #define GAME_H
+
 #include "projectiles_manager.h"
-#include "spaceship.h"
-#include <SFML/Graphics.hpp>
+#include "player_ship.h"
+#include "asteroid_manager.h"
+#include "enemy_manager.h"
+#include "player_ship_manager.h"
 
 class Game
 {
@@ -12,9 +15,16 @@ public:
 
 private:
 	sf::RenderWindow window_;
+
 	ProjectilesManager projectiles_;
-	//PlayerShip player_ship_;
+	ProjectilesManager player_projectiles_;
+	ProjectilesManager enemy_projectiles_;
+
+	AsteroidManager asteroids_;
+	EnemyManager enemy_ship_;
+
+	PlayerShip player_ship_;
+	PlayerShipManager player_manager_;
 	sf::Clock clock_;
-	float dt_ = 0.016f;
 };
 #endif
