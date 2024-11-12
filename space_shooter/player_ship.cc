@@ -1,5 +1,7 @@
 #include "player_ship.h"
 
+#include <iostream>
+
 
 sf::Texture PlayerShip::texture_;
 
@@ -46,12 +48,19 @@ void PlayerShip::Damage(int damage)
 	if (hp_ <= 0)
 	{
 		SetDeath();
+
+		std::cout << "Player is dead\n";
 	}
 }
 
 void PlayerShip::SetDeath()
 {
 	Entity::SetDeath();
+
+	if (PlayerShip::IsDead())
+	{
+		std::cout << "Player is dead" << '\n';
+	}
 }
 
 void PlayerShip::CheckCollisions(std::vector<Asteroid>& asteroids)
