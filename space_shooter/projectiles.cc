@@ -7,7 +7,7 @@ sf::Texture Projectiles::texture_;
 
 Projectiles::Projectiles(sf::Vector2f direction)
 {
-	texture_.loadFromFile("assets\\sprites\\png_redux\\Lasers\\laserGreen10.png");
+	texture_.loadFromFile("assets\\sprites\\png_redux\\Lasers\\laserRed12.png");
 
 	sprite_.setTexture(texture_);
 	sprite_.setColor(sf::Color(255, 255, 255, 255));

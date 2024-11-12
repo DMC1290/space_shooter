@@ -1,5 +1,8 @@
 #include "player_ship.h"
 
+
+sf::Texture PlayerShip::texture_;
+
 constexpr double kShootPeriod = 0.15f;
 
 PlayerShip::PlayerShip()
@@ -18,16 +21,6 @@ void PlayerShip::SetPosition(sf::Vector2u position)
 	UpdateHitBox();
 }
 
-void PlayerShip::Refresh(const double dt)
-{
-	shoot_dt_ += dt;
-	if (shoot_dt_ > kShootPeriod)
-	{
-		is_shoot_ready_ = true;
-		shoot_dt_ = 0;
-	}
-}
-
 void PlayerShip::UpdateHitBox()
 {
 	hit_box_ = sprite_.getGlobalBounds();
@@ -35,11 +28,37 @@ void PlayerShip::UpdateHitBox()
 	hit_box_.top += getPosition().y;
 }
 
+void PlayerShip::Refresh(const double dt)
+{
+	shoot_dt_ += dt;
+
+	if (shoot_dt_ > kShootPeriod)
+	{
+		shoot_dt_ = 0;
+		is_shoot_ready_ = true;
+	}
+}
+
+void PlayerShip::Damage(int damage)
+{
+	hp_ -= damage;
+
+	if (hp_ <= 0)
+	{
+		SetDeath();
+	}
+}
+
+void PlayerShip::SetDeath()
+{
+	Entity::SetDeath();
+}
+
 void PlayerShip::CheckCollisions(std::vector<Asteroid>& asteroids)
 {
 	for (auto& a : asteroids)
 	{
-		if(a.IsDead() == false && hit_box_.intersects(a.HitBox()))
+		if (a.IsDead() == false && hit_box_.intersects(a.HitBox()))
 		{
 			a.SetDeath();
 		}
@@ -63,7 +82,40 @@ void PlayerShip::CheckCollisions(std::vector<Enemy>& enemies)
 	{
 		if (e.IsDead() == false && hit_box_.intersects(e.HitBox()))
 		{
-			e.Damage(5);
+			e.SetDeath();
+		}
+	}
+}
+
+void PlayerShip::CheckCollisionsAsteroids(std::vector<Asteroid>& asteroids)
+{
+	for (auto& a : asteroids)
+	{
+		if (PlayerShip::IsDead() == false && hit_box_.intersects(a.HitBox()))
+		{
+			PlayerShip::SetDeath();
+		}
+	}
+}
+
+void PlayerShip::CheckCollisionsProjectiles(std::vector<Projectiles>& projectiles)
+{
+	for (auto& p : projectiles)
+	{
+		if (PlayerShip::IsDead() == false && hit_box_.intersects(p.HitBox()))
+		{
+			PlayerShip::Damage(1);
+		}
+	}
+}
+
+void PlayerShip::CheckCollisionsEnemies(std::vector<Enemy>& enemies)
+{
+	for (auto& e : enemies)
+	{
+		if (PlayerShip::IsDead() == false && hit_box_.intersects(e.HitBox()))
+		{
+			PlayerShip::SetDeath();
 		}
 	}
 }

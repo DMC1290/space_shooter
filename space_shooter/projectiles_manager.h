@@ -22,6 +22,7 @@ protected:
 
 private:
 	std::vector<Projectiles> projectiles_;
+	
 	double cooldown_dt_ = 0;
 };
 #endif

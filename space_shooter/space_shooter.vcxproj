@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="asteroid.cc" />
     <ClCompile Include="asteroid_manager.cc" />
+    <ClCompile Include="back_ground.cc" />
     <ClCompile Include="enemy.cc" />
     <ClCompile Include="enemy_manager.cc" />
     <ClCompile Include="entity.cc" />
@@ -142,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="asteroid.h" />
     <ClInclude Include="asteroid_manager.h" />
+    <ClInclude Include="back_ground.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="enemy_manager.h" />
     <ClInclude Include="entity.h" />

@@ -12,8 +12,8 @@
 class AsteroidManager : public sf::Drawable
 {
 public:
-	void Refresh(const double dt, const sf::Vector2u& window_size);
 	std::vector<Asteroid>& GetEntities() { return asteroids_; }
+	void Refresh(const double dt, const sf::Vector2u& window_size);
 
 protected:
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

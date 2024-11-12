@@ -11,10 +11,8 @@ Game::Game()
 	window_.create(sf::VideoMode::getDesktopMode(), "Space Shooter", sf::Style::Fullscreen);
 }
 
-
 void Game::Loop()
 {
-
 	window_.setMouseCursorVisible(false);
 
 	double dt = 0.016f;
@@ -52,20 +50,23 @@ void Game::Loop()
 		enemy_projectiles_.Refresh(dt, window_.getSize());
 		enemy_ship_.Refresh(dt, window_.getSize(), enemy_projectiles_);
 
-		enemy_projectiles_.Refresh(dt, window_.getSize());
-		enemy_ship_.Refresh(dt, window_.getSize(), enemy_projectiles_);
-
+		player_ship_.Refresh(dt);
 		player_ship_.CheckCollisions(asteroids_.GetEntities());
-		player_ship_.CheckCollisions(enemy_ship_.GetEntities());
 		player_ship_.CheckCollisions(enemy_projectiles_.GetEntities());
+		player_ship_.CheckCollisions(enemy_ship_.GetEntities());
+
+		player_ship_.CheckCollisionsAsteroids(asteroids_.GetEntities());
+		player_ship_.CheckCollisionsProjectiles(enemy_projectiles_.GetEntities());
+		player_ship_.CheckCollisionsEnemies(enemy_ship_.GetEntities());
 
 		player_projectiles_.Refresh(dt, window_.getSize());
 		player_projectiles_.CheckCollisions(asteroids_.GetEntities());
 		player_projectiles_.CheckCollisions(enemy_ship_.GetEntities());
 
+		player_manager_.Refresh(dt, window_.getSize(), player_projectiles_);
 
 		window_.clear();
-
+		window_.draw(back_ground_);
 		window_.draw(player_projectiles_);
 		window_.draw(enemy_projectiles_);
 		window_.draw(asteroids_);

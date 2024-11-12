@@ -45,17 +45,16 @@ void EnemyManager::Refresh(const double dt, const sf::Vector2u& window_size, Pro
 		//p.setRotation(180);
 		e.Move(dt, window_size);
 
-		std::cout << i << " : " << e.ShootDt() << " :\t" << e.IsShootReady();
 
 		if (e.IsShootReady())
 		{
-			std::cout << "\tShoot!!!";
+			
 			
 			enemy_projectiles_manager.Spawn(e.GetPosition(), { 0, 500 });
 		}
 
 		i++;
-		std::cout << '\n';
+		
 	}
 	//system("cls");
 }
@@ -67,3 +66,7 @@ void EnemyManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 		target.draw(e);
 	}
 }
+
+//draw pour les projectiles enemies
+
+//CheckCollisions

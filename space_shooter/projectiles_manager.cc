@@ -34,7 +34,6 @@ void ProjectilesManager::Refresh(const double dt, const sf::Vector2u& window_siz
 		//p.UpdateAnimation(dt);
 	}
 
-	std::cout << "nb projectiles ? " << projectiles_.size() << '\n';
 }
 
 void ProjectilesManager::CheckCollisions(std::vector<Asteroid>& asteroids)
@@ -46,7 +45,7 @@ void ProjectilesManager::CheckCollisions(std::vector<Asteroid>& asteroids)
 			if (p.IsDead() == false && a.IsDead() == false && p.Intersects(a.HitBox()))
 			{
 				p.SetDeath();
-				a.SetDeath();
+				a.Damage(1);
 			}
 		}
 	}

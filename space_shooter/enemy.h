@@ -18,7 +18,7 @@ public:
 
 private:
 	static sf::Texture texture_;
-	int hp_ = 10;
+	int hp_ = 3;
 
 	double shoot_dt_ = 0.f;
 	double burst_dt_ = 0.f;

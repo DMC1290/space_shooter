@@ -3,35 +3,37 @@
 
 #include <vector>
 
-#include <SFML/Graphics.hpp>
-
+#include "entity.h"
 #include "asteroid.h"
 #include "enemy.h"
 #include "projectiles_manager.h"
 
-constexpr double kSpeed = 500.0f;
-
-class PlayerShip : public sf::Drawable, public sf::Transformable
+class PlayerShip : public Entity
 {
 public:
 
 	PlayerShip();
-	//void Move(sf::Vector2f direction, const double dt);
-
-	bool IsShootReady() const { return is_shoot_ready_; }
-	void ShootConfirm() { is_shoot_ready_ = false; }
 
 	sf::FloatRect HitBox() const { return hit_box_; }
 	sf::Vector2f GetPosition() const { return getPosition(); }
 
+	bool IsShootReady() const { return is_shoot_ready_; }
+	double Shoot() const { return shoot_dt_; }
+	void ShootConfirm() { is_shoot_ready_ = false; }
+
 	void SetPosition(sf::Vector2u position);
 
-	void Refresh(const double dt);
-	
 	void UpdateHitBox();
+	void Refresh(const double dt);
+	void Damage(int damage);
+	void SetDeath();
+
 	void CheckCollisions(std::vector<Asteroid>& asteroids);
 	void CheckCollisions(std::vector<Projectiles>& projectiles);
 	void CheckCollisions(std::vector<Enemy>& enemies);
+	void CheckCollisionsAsteroids(std::vector<Asteroid>& asteroids);
+	void CheckCollisionsProjectiles(std::vector<Projectiles>& projectiles);
+	void CheckCollisionsEnemies(std::vector<Enemy>& enemies);
 
 protected:
 
@@ -39,8 +41,9 @@ protected:
 
 private:
 
-	sf::Texture texture_;
-	sf::Sprite sprite_;
+	static sf::Texture texture_;
+	int hp_ = 3;
+
 	sf::FloatRect hit_box_;
 
 	double shoot_dt_ = 0.f;

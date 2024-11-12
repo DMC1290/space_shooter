@@ -24,17 +24,17 @@ void AsteroidManager::Refresh(const double dt, const sf::Vector2u& window_size)
 	(
 		asteroids_.begin(),
 		asteroids_.end(),
-		[](const Asteroid& p) {return p.IsDead(); }
+		[](const Asteroid& a) {return a.IsDead(); }
 	);
 
 	if (removed_elt != asteroids_.end())
 	{
-		asteroids_.erase(removed_elt);
+		asteroids_.erase(removed_elt, asteroids_.end());
 	}
 
-	for (Asteroid& p: asteroids_)
+	for (Asteroid& a: asteroids_)
 	{
-		p.Move(dt, window_size);
+		a.Move(dt, window_size);
 	}
 }
 

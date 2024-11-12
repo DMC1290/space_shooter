@@ -4,7 +4,6 @@
 #include "player_ship.h"
 
 
-
 class PlayerShipManager : public sf::Drawable
 {
 public:
@@ -15,7 +14,7 @@ protected:
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 private:
+	std::vector<PlayerShip> player_projectiles_;
 	PlayerShip player_;
 };
-
 #endif

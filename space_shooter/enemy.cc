@@ -1,6 +1,5 @@
 #include "enemy.h"
 
-#include <iostream>
 
 sf::Texture Enemy::texture_;
 
