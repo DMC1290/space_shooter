@@ -15,11 +15,12 @@ public:
 	void Refresh(const double dt);
 	void Damage(int damage);
 	void SetDeath();
+	int Score(int score);
 
 private:
 	static sf::Texture texture_;
 	int hp_ = 3;
-
+	
 	double shoot_dt_ = 0.f;
 	double burst_dt_ = 0.f;
 	bool burst_ready_ = false;

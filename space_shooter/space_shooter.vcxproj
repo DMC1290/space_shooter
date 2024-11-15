@@ -139,6 +139,7 @@
     <ClCompile Include="projectiles_manager.cc" />
     <ClCompile Include="player_ship.cc" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="soundeffect.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="asteroid.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="projectiles.h" />
     <ClInclude Include="projectiles_manager.h" />
     <ClInclude Include="player_ship.h" />
+    <ClInclude Include="soundeffect.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

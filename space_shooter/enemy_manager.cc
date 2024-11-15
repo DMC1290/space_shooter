@@ -4,12 +4,12 @@
 #include <random>
 #include <SFML/Graphics/RenderTarget.hpp>
 
-constexpr double kSpawnPeriod = 3.f;
+constexpr double kSpawnPeriod = 0.8f;
 
 void EnemyManager::Refresh(const double dt, const sf::Vector2u& window_size, ProjectilesManager& enemy_projectiles_manager)
 {
 	spawn_dt_ += dt;
-	if (enemies_.size() < 3 && spawn_dt_ > kSpawnPeriod)
+	if (enemies_.size() < 30 && spawn_dt_ > kSpawnPeriod)
 	{
 		enemies_.emplace_back();
 

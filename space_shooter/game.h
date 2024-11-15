@@ -25,6 +25,8 @@ private:
 	ProjectilesManager enemy_projectiles_;
 
 	AsteroidManager asteroids_;
+
+	Enemy enemy_;
 	EnemyManager enemy_ship_;
 
 	PlayerShip player_ship_;
@@ -38,7 +40,7 @@ private:
 
 	sf::Font font_;
 	sf::Text score_;
-	sf::Text lives_;
+	sf::Text hp_;
 	sf::Text game_over_;
 };
 #endif

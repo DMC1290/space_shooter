@@ -48,12 +48,14 @@ void PlayerShip::Refresh(const double dt)
 			is_hit_ = false;
 			hit_dt_ = 0;
 		}
-		// invincibility
+		// invincibility only when player hits a laser
 	}
 
 	if (is_hit_)
 	{
+
 		sprite_.setColor(sf::Color(255, 100, 100, 200)); //pendant un court instant
+
 	}
 	else
 	{
@@ -100,6 +102,7 @@ void PlayerShip::SetDeath()
 	}
 }
 
+// killing asteroids by touching spaceship
 void PlayerShip::CheckCollisions(std::vector<Asteroid>& asteroids)
 {
 
@@ -113,6 +116,7 @@ void PlayerShip::CheckCollisions(std::vector<Asteroid>& asteroids)
 	}
 }
 
+// killing projectiles by touching spaceship
 void PlayerShip::CheckCollisions(std::vector<Projectiles>& projectiles)
 {
 	for (auto& p : projectiles)
@@ -125,18 +129,21 @@ void PlayerShip::CheckCollisions(std::vector<Projectiles>& projectiles)
 	}
 }
 
+// killing enemies by touching spaceship
 void PlayerShip::CheckCollisions(std::vector<Enemy>& enemies)
 {
+
 	for (auto& e : enemies)
 	{
 		if (e.IsDead() == false && hit_box_.intersects(e.HitBox()))
 		{
 			e.SetDeath();
-			return;
+			
 		}
 	}
 }
 
+// killing spaceship by touching asteroids
 void PlayerShip::CheckCollisionsAsteroids(std::vector<Asteroid>& asteroids)
 {
 	for (auto& a : asteroids)
@@ -153,6 +160,7 @@ void PlayerShip::CheckCollisionsAsteroids(std::vector<Asteroid>& asteroids)
 	}
 }
 
+// killing spaceship by touching projectiles
 void PlayerShip::CheckCollisionsProjectiles(std::vector<Projectiles>& projectiles)
 {
 	if (is_hit_)
@@ -173,6 +181,7 @@ void PlayerShip::CheckCollisionsProjectiles(std::vector<Projectiles>& projectile
 	}
 }
 
+// killing spaceship by touching enemies
 void PlayerShip::CheckCollisionsEnemies(std::vector<Enemy>& enemies)
 {
 	for (auto& e : enemies)
@@ -188,6 +197,7 @@ void PlayerShip::CheckCollisionsEnemies(std::vector<Enemy>& enemies)
 		}
 	}
 }
+
 
 void PlayerShip::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {

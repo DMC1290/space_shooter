@@ -51,6 +51,9 @@
     <ClCompile Include="back_ground.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="soundeffect.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="projectiles.h">
@@ -84,6 +87,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="back_ground.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="soundeffect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
