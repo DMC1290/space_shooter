@@ -90,7 +90,3 @@ void EnemyManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 		target.draw(e);
 	}
 }
-
-//draw pour les projectiles enemies
-
-//CheckCollisions

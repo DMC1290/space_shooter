@@ -10,12 +10,12 @@ constexpr double kShootPeriod = 0.15f;
 
 PlayerShip::PlayerShip()
 {
-	texture_.loadFromFile("assets\\sprites\\png_redux\\playerShip1_red.png");
+	texture_.loadFromFile("assets\\sprites\\space_ship.png");
 
 	sprite_.setTexture(texture_);
 	sprite_.setOrigin(texture_.getSize().x / 2, texture_.getSize().y / 2);
 	sprite_.setRotation(0);
-	sprite_.setScale(0.5f, 0.5f);
+	sprite_.setScale(1.f, 1.f);
 }
 
 void PlayerShip::SetPosition(sf::Vector2u position)
@@ -210,7 +210,7 @@ void PlayerShip::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	rectangle.setOutlineColor(sf::Color(255, 0, 0, 255));
 	rectangle.setOutlineThickness(1);
 
-	target.draw(rectangle);
+	//target.draw(rectangle);
 
 	target.draw(sprite_, states);
 }

@@ -8,12 +8,12 @@ constexpr double kBurstPeriod = 0.6f;
 
 Enemy::Enemy()
 {
-	texture_.loadFromFile("assets\\sprites\\png_redux\\Enemies\\enemyBlack1.png");
+	texture_.loadFromFile("assets\\sprites\\enemy_ship.png");
 
 	sprite_.setTexture(texture_);
 	sprite_.setOrigin(sprite_.getTextureRect().width / 2, sprite_.getTextureRect().height / 2);
-	sprite_.setRotation(0);
-	sprite_.setScale(0.6f, 0.6f);
+	sprite_.setRotation(180);
+	sprite_.setScale(3.f, 3.f);
 
 	hit_box_.width = static_cast<float>(sprite_.getTextureRect().width) * sprite_.getScale().x;
 	hit_box_.height = static_cast<float>(sprite_.getTextureRect().height) * sprite_.getScale().y;

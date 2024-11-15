@@ -52,7 +52,7 @@ void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	rectangle.setOutlineColor(sf::Color(0, 0, 255, 255));
 	rectangle.setOutlineThickness(1);
 
-	target.draw(rectangle);
+	//target.draw(rectangle);
 
 	target.draw(sprite_, states);
 }
