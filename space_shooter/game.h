@@ -1,6 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <SFML/Audio.hpp>
+
 #include "projectiles_manager.h"
 #include "asteroid_manager.h"
 #include "back_ground.h"
@@ -29,6 +31,10 @@ private:
 	PlayerShipManager player_manager_;
 
 	sf::Clock clock_;
+
+	sf::Music music_;
+
+	sf::SoundBuffer sound_fx_laser_;
 
 	sf::Font font_;
 	sf::Text score_;
