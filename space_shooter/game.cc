@@ -7,13 +7,12 @@ constexpr float kCooldown_limit_ = 0.15f;
 
 Game::Game()
 {
+
 	window_.create(sf::VideoMode::getDesktopMode(), "Space Shooter", sf::Style::Fullscreen);
 
-
-	music_.openFromFile("assets\\foozle\\Foozle_Space_Music\\track_01\\v1.0_full_song.wav");
-	music_.setLoop(true);
-
-	music_.play();
+	music_1.openFromFile("assets\\foozle\\Foozle_Space_Music\\track_01\\v1.0_full_song.wav");
+	music_1.setLoop(true);
+	music_1.play();
 
 
 	font_.loadFromFile("assets\\fonts\\arcade_classic_2\\ARCADECLASSIC.TTF");
@@ -28,7 +27,7 @@ Game::Game()
 	hp_.setFont(font_);
 	hp_.setCharacterSize(40); // set the character size in pixels, not points!
 	hp_.setFillColor(sf::Color::White);// set the color
-	hp_.setPosition( window_.getSize().x - 150, 50);
+	hp_.setPosition(window_.getSize().x - 150, 50);
 
 	game_over_.setString("Game Over!");// set the string to display
 	game_over_.setFont(font_); 	// select the font
@@ -39,11 +38,6 @@ Game::Game()
 	sound_fx_laser_.loadFromFile("assets\\sound_effect\\kenney_sci-fi-sounds\\Audio\\laserSmall_002.ogg");
 	laser_.setBuffer(sound_fx_laser_);
 	laser_.setVolume(50);
-
-	sound_clang_.loadFromFile("assets\\sound_effect\\berserk_clang_sound_effect.mp3");
-	clang_.setBuffer(sound_clang_);
-
-
 }
 
 void Game::Loop()
@@ -138,12 +132,13 @@ void Game::Loop()
 		if (player_ship_.GetHP() > 0)
 		{
 			window_.draw(player_ship_);
+			
 		}
 		else
 		{
 			window_.draw(game_over_);
 		}
-
+		
 		window_.draw(score_);
 		window_.draw(hp_);
 		window_.display();

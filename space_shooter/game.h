@@ -34,13 +34,15 @@ private:
 
 	sf::Clock clock_;
 
-	sf::Music music_;
+	sf::Music music_1;
+
 
 	sf::SoundBuffer sound_fx_laser_;
 	sf::Sound laser_;
 
-	sf::SoundBuffer sound_clang_;
-	sf::Sound clang_;
+	sf::SoundBuffer game_end_;
+	sf::Sound over_;
+	
 
 	sf::Font font_;
 	sf::Text score_;

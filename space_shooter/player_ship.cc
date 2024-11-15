@@ -1,6 +1,7 @@
 #include "player_ship.h"
 
 #include <iostream>
+#include <SFML/Audio.hpp>
 
 
 sf::Texture PlayerShip::texture_;
@@ -53,16 +54,12 @@ void PlayerShip::Refresh(const double dt)
 
 	if (is_hit_)
 	{
-
 		sprite_.setColor(sf::Color(255, 100, 100, 200)); //pendant un court instant
-
 	}
 	else
 	{
 		sprite_.setColor(sf::Color(255, 255, 255, 255));
 	}
-
-	//std::cout << " is hit? " << is_hit_ << "hit_dt ? " << hit_dt_ << '\n';
 }
 
 void PlayerShip::HitPlayerShip()
@@ -112,6 +109,7 @@ void PlayerShip::CheckCollisions(std::vector<Asteroid>& asteroids)
 		{
 			a.SetDeath();
 			return;
+
 		}
 	}
 }
@@ -138,9 +136,11 @@ void PlayerShip::CheckCollisions(std::vector<Enemy>& enemies)
 		if (e.IsDead() == false && hit_box_.intersects(e.HitBox()))
 		{
 			e.SetDeath();
-			
+
 		}
+		
 	}
+
 }
 
 // killing spaceship by touching asteroids

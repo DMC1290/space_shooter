@@ -52,6 +52,10 @@ private:
 	bool is_shoot_ready_ = false;
 	bool is_hit_ = false;
 
+	float blink_interval_ = 0.1f;
+	float blink_duration_ = 1.f;
+	
+
 	int hp_ = 3;
 };
 #endif
