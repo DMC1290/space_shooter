@@ -20,11 +20,13 @@ public:
 	bool IsShootReady() const { return is_shoot_ready_; }
 	double Shoot() const { return shoot_dt_; }
 	void ShootConfirm() { is_shoot_ready_ = false; }
+	int GetHP() { return hp_; }
 
 	void SetPosition(sf::Vector2u position);
 
 	void UpdateHitBox();
 	void Refresh(const double dt);
+	void HitPlayerShip();
 	void Damage(int damage);
 	void SetDeath();
 
@@ -42,11 +44,14 @@ protected:
 private:
 
 	static sf::Texture texture_;
-	int hp_ = 3;
-
 	sf::FloatRect hit_box_;
 
 	double shoot_dt_ = 0.f;
+	double hit_dt_ = 0.f;
+
 	bool is_shoot_ready_ = false;
+	bool is_hit_ = false;
+
+	int hp_ = 3;
 };
 #endif

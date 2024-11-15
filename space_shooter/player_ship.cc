@@ -39,11 +39,43 @@ void PlayerShip::Refresh(const double dt)
 		shoot_dt_ = 0;
 		is_shoot_ready_ = true;
 	}
+
+	if (is_hit_ == true)
+	{
+		hit_dt_ += dt;
+		if (hit_dt_ >= 3.f)
+		{
+			is_hit_ = false;
+			hit_dt_ = 0;
+		}
+		// invincibility
+	}
+
+	if (is_hit_)
+	{
+		sprite_.setColor(sf::Color(255, 100, 100, 200)); //pendant un court instant
+	}
+	else
+	{
+		sprite_.setColor(sf::Color(255, 255, 255, 255));
+	}
+
+	//std::cout << " is hit? " << is_hit_ << "hit_dt ? " << hit_dt_ << '\n';
+}
+
+void PlayerShip::HitPlayerShip()
+{
+	is_hit_ = true;
 }
 
 void PlayerShip::Damage(int damage)
 {
-	hp_ -= damage;
+	if (is_hit_ == true)
+	{
+		hp_ -= damage;
+
+		std::cout << "Player has : " << hp_ << " HP" << '\n';
+	}
 
 	if (hp_ <= 0)
 	{
@@ -51,25 +83,32 @@ void PlayerShip::Damage(int damage)
 
 		std::cout << "Player is dead\n";
 	}
+
 }
 
 void PlayerShip::SetDeath()
 {
-	Entity::SetDeath();
-
-	if (PlayerShip::IsDead())
+	if (is_hit_)
 	{
-		std::cout << "Player is dead" << '\n';
+		Entity::SetDeath();
+	}
+
+	if (IsDead())
+	{
+		hp_ = 0;
+		std::cout << "Player is dead!" << '\n';
 	}
 }
 
 void PlayerShip::CheckCollisions(std::vector<Asteroid>& asteroids)
 {
+
 	for (auto& a : asteroids)
 	{
 		if (a.IsDead() == false && hit_box_.intersects(a.HitBox()))
 		{
 			a.SetDeath();
+			return;
 		}
 	}
 }
@@ -81,6 +120,7 @@ void PlayerShip::CheckCollisions(std::vector<Projectiles>& projectiles)
 		if (p.IsDead() == false && hit_box_.intersects(p.HitBox()))
 		{
 			p.SetDeath();
+			return;
 		}
 	}
 }
@@ -92,6 +132,7 @@ void PlayerShip::CheckCollisions(std::vector<Enemy>& enemies)
 		if (e.IsDead() == false && hit_box_.intersects(e.HitBox()))
 		{
 			e.SetDeath();
+			return;
 		}
 	}
 }
@@ -100,20 +141,34 @@ void PlayerShip::CheckCollisionsAsteroids(std::vector<Asteroid>& asteroids)
 {
 	for (auto& a : asteroids)
 	{
-		if (PlayerShip::IsDead() == false && hit_box_.intersects(a.HitBox()))
+		if (IsDead() == false && hit_box_.intersects(a.HitBox()))
 		{
-			PlayerShip::SetDeath();
+			HitPlayerShip();
+
+			
+				SetDeath();
+			
+			return;
 		}
 	}
 }
 
 void PlayerShip::CheckCollisionsProjectiles(std::vector<Projectiles>& projectiles)
 {
+	if (is_hit_)
+	{
+		return;
+	}
+
 	for (auto& p : projectiles)
 	{
-		if (PlayerShip::IsDead() == false && hit_box_.intersects(p.HitBox()))
+		if (IsDead() == false && hit_box_.intersects(p.HitBox()))
 		{
-			PlayerShip::Damage(1);
+			HitPlayerShip();
+
+				Damage(1);
+			
+			return;
 		}
 	}
 }
@@ -122,9 +177,14 @@ void PlayerShip::CheckCollisionsEnemies(std::vector<Enemy>& enemies)
 {
 	for (auto& e : enemies)
 	{
-		if (PlayerShip::IsDead() == false && hit_box_.intersects(e.HitBox()))
+		if (IsDead() == false && hit_box_.intersects(e.HitBox()))
 		{
-			PlayerShip::SetDeath();
+			HitPlayerShip();
+			
+			
+				SetDeath();
+			
+			return;
 		}
 	}
 }

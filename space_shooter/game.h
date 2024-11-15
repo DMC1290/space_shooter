@@ -29,5 +29,10 @@ private:
 	PlayerShipManager player_manager_;
 
 	sf::Clock clock_;
+
+	sf::Font font_;
+	sf::Text score_;
+	sf::Text lives_;
+	sf::Text game_over_;
 };
 #endif
