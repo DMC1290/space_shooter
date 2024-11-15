@@ -2,6 +2,7 @@
 #define ENEMY_MANAGER_H
 
 #include<vector>
+#include <SFML/Audio.hpp>
 
 #include"enemy.h"
 #include "projectiles_manager.h"
@@ -18,5 +19,12 @@ protected:
 private:
 	std::vector<Enemy> enemies_;
 	double spawn_dt_ = 0;
+
+	sf::SoundBuffer sound_fx_laser_enemy_;
+	sf::Sound laser_enemy_;
+	std::vector<sf::Sound> activeEnemySounds_;
+
+	float sound_cooldown_;
+	static constexpr float kSoundInterval_ = 0.5f;
 };
 #endif

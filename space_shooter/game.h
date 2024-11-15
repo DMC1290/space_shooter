@@ -37,6 +37,10 @@ private:
 	sf::Music music_;
 
 	sf::SoundBuffer sound_fx_laser_;
+	sf::Sound laser_;
+
+	sf::SoundBuffer sound_clang_;
+	sf::Sound clang_;
 
 	sf::Font font_;
 	sf::Text score_;

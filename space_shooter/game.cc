@@ -12,6 +12,7 @@ Game::Game()
 
 	music_.openFromFile("assets\\foozle\\Foozle_Space_Music\\track_01\\v1.0_full_song.wav");
 	music_.setLoop(true);
+
 	music_.play();
 
 
@@ -35,6 +36,12 @@ Game::Game()
 	game_over_.setFillColor(sf::Color::Green);// set the color
 	game_over_.setPosition(window_.getSize().x / 2 - 250, window_.getSize().y / 2 - 50);
 
+	sound_fx_laser_.loadFromFile("assets\\sound_effect\\kenney_sci-fi-sounds\\Audio\\laserSmall_002.ogg");
+	laser_.setBuffer(sound_fx_laser_);
+	laser_.setVolume(50);
+
+	sound_clang_.loadFromFile("assets\\sound_effect\\berserk_clang_sound_effect.mp3");
+	clang_.setBuffer(sound_clang_);
 
 
 }
@@ -59,6 +66,8 @@ void Game::Loop()
 			{
 				player_projectiles_.Spawn(player_ship_.GetPosition(), { 0, -1500 });
 				player_ship_.ShootConfirm();
+
+				laser_.play();
 			}
 		}
 
