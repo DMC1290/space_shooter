@@ -48,5 +48,6 @@ private:
 	sf::Text score_;
 	sf::Text hp_;
 	sf::Text game_over_;
+	sf::Text exit_;
 };
 #endif

@@ -35,6 +35,15 @@ Game::Game()
 	game_over_.setFillColor(sf::Color::Green);// set the color
 	game_over_.setPosition(window_.getSize().x / 2 - 250, window_.getSize().y / 2 - 50);
 
+	exit_.setString("Press esc to exit");
+	exit_.setFont(font_);
+	exit_.setCharacterSize(50); // set the character size in pixels, not points!
+	exit_.setFillColor(sf::Color::White);// set the color
+	exit_.setPosition(window_.getSize().x - 1000, window_.getSize().y -300);
+
+
+
+
 	sound_fx_laser_.loadFromFile("assets\\sound_effect\\kenney_sci-fi-sounds\\Audio\\laserSmall_002.ogg");
 	laser_.setBuffer(sound_fx_laser_);
 	laser_.setVolume(50);
@@ -137,6 +146,8 @@ void Game::Loop()
 		else
 		{
 			window_.draw(game_over_);
+			window_.draw(exit_);
+
 		}
 		
 		window_.draw(score_);
